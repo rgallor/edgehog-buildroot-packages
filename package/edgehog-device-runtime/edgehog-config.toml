@@ -1,0 +1,18 @@
+#
+# Copyright 2022 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+device_id = ASTARTE_DEVICE_ID
+pairing_token = ASTARTE_PAIRING_JWT
+pairing_url = ASTARTE_PAIRING_BASE_URL
+realm = ASTARTE_REALM
+interfaces_directory = "/usr/share/edgehog-astarte-interfaces"
+store_directory = "/data/edgehog-device-runtime/"
+download_directory = "/upload/"
+
+[[telemetry_config]]
+interface_name= "io.edgehog.devicemanager.StorageUsage"
+enabled= false
+period= 0
