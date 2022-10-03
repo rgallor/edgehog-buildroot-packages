@@ -1,0 +1,15 @@
+#
+# Copyright 2022 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config BR2_PACKAGE_EDGEHOG_ASTARTE_INTERFACE
+        bool "edgehog-astarte-interface"
+        depends on BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
+        help
+          Edgehog Astarte Interfaces contains the set of interfaces
+          that define a common communication schema between Astarte
+          remote istance and Edgehog devices.
+
+          https://github.com/edgehog-device-manager/edgehog-astarte-interfaces
