@@ -1,0 +1,8 @@
+#
+# Copyright 2022 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+source "$BR2_EXTERNAL_EDGEHOG_PATH/package/edgehog-astarte-interface/Config.in"		
+source "$BR2_EXTERNAL_EDGEHOG_PATH/package/edgehog-device-runtime/Config.in"
