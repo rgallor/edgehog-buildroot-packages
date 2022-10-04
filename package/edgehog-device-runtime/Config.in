@@ -9,6 +9,7 @@ config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
             depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
             depends on BR2_PACKAGE_HAS_UDEV
             depends on BR2_PACKAGE_DBUS
+            depends on BR2_FORTIFY_SOURCE_NONE
             select BR2_PACKAGE_EDGEHOG_ASTARTE_INTERFACE
             select BR2_PACKAGE_UPOWER
             select BR2_PACKAGE_CA_CERTIFICATES
