@@ -1,0 +1,52 @@
+#
+# Copyright 2022 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
+            bool "edgehog-device-runtime"
+            depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+            depends on BR2_PACKAGE_HAS_UDEV
+            depends on BR2_PACKAGE_DBUS
+            depends on BR2_FORTIFY_SOURCE_NONE
+            select BR2_PACKAGE_EDGEHOG_ASTARTE_INTERFACE
+            select BR2_PACKAGE_UPOWER
+            select BR2_PACKAGE_CA_CERTIFICATES
+            select BR2_PACKAGE_HOST_RUSTC
+            default y
+            help
+              This is a portable middleware written in Rust, that enables remote device management 
+              on Linux-based systems.
+
+              https://github.com/edgehog-device-manager/edgehog-device-runtime
+
+if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_REALM
+      string "Astarte realm"
+      default "test"
+      help
+            The realm to be used use in Astarte requests.
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_PAIRING_BASE_URL
+        string "Astarte pairing base URL"
+        default "http://localhost:4003"
+        help
+            The base URL to reach Astarte Pairing API.This should be the URL up to (and excluding) /v1.
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_PAIRING_JWT
+        string "Pairing JWT token"
+        default ""
+        help
+            JWT token to authorize device registration.
+
+            Can be obtained with ./generate-astarte-credentials -t pairing -p yourrealmkey.key
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_DEVICE_ID
+        string "Astarte Device ID"
+        default ""
+        help
+            Astarte identifies each device with a 128 bit Device ID which has to be unique within its Realm
+
+endif
