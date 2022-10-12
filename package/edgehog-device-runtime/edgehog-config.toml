@@ -10,7 +10,7 @@ pairing_url = ASTARTE_PAIRING_BASE_URL
 realm = ASTARTE_REALM
 interfaces_directory = "/usr/share/edgehog-astarte-interfaces"
 store_directory = "/data/edgehog-device-runtime/"
-download_directory = "/upload/"
+download_directory = "/var/tmp/"
 
 [[telemetry_config]]
 interface_name= "io.edgehog.devicemanager.StorageUsage"
