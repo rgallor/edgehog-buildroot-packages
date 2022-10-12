@@ -9,7 +9,7 @@ pairing_token = ASTARTE_PAIRING_JWT
 pairing_url = ASTARTE_PAIRING_BASE_URL
 realm = ASTARTE_REALM
 interfaces_directory = "/usr/share/edgehog-astarte-interfaces"
-store_directory = "/data/edgehog-device-runtime/"
+store_directory = "/var/lib/edgehog-device-runtime/"
 download_directory = "/var/tmp/"
 
 [[telemetry_config]]
