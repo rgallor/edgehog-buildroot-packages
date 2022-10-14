@@ -1,0 +1,17 @@
+#
+# Copyright 2022 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config BR2_PACKAGE_EDGEHOG_DEVICE_HARDWAREID_SERVICE
+            bool "edgehog-device-hardwareId-service"
+            depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+            depends on BR2_PACKAGE_DBUS
+            depends on BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
+            select BR2_PACKAGE_HOST_RUSTC
+            default y
+            help
+              Reference project of a service that either fetches hardware id from SMBIOS/DMI or from the kernel command line.            
+
+              https://github.com/edgehog-device-manager/edgehog-device-runtime/tree/main/hardware-id-service
