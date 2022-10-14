@@ -1,0 +1,17 @@
+#
+# Copyright 2022 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+[Unit]
+Description=Edgehog Device hardware ID service
+After=syslog.target network.target
+
+[Service]
+Type = simple
+ExecStart=/usr/bin/hardware-id-service -k hardwareId
+Restart = on-failure
+
+[Install]
+WantedBy=multi-user.target
