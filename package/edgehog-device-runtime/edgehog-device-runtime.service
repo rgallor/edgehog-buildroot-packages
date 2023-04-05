@@ -6,13 +6,18 @@
 
 [Unit]
 Description=Edgehog Device Runtime daemon
-After=syslog.target network.target
+After=syslog.target network-online.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+# For development, keep restarting to wait for the platform to come online
+StartLimitIntervalSec=0
 
 [Service]
-Type = simple
+Type=simple
 Environment="RUST_LOG=debug"
 ExecStart=/usr/bin/edgehog-device-runtime -c /etc/edgehog/edgehog-device-runtime-config.toml
-Restart = on-failure
+Restart=on-failure
+# Avoid restarting too quickly
+RestartSec=2
 
 [Install]
 WantedBy=multi-user.target
