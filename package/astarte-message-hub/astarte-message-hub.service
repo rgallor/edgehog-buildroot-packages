@@ -1,0 +1,23 @@
+#
+# Copyright 2022-2023 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+[Unit]
+Description=Astarte Message Hub
+After=syslog.target network-online.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+# For development, keep restarting to wait for the platform to come online
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Environment="RUST_LOG=debug"
+ExecStart=/usr/bin/astarte-message-hub -t /etc/astarte/astarte-message-hub-config.toml
+Restart=on-failure
+# Avoid restarting too quickly
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

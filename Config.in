@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-source "$BR2_EXTERNAL_EDGEHOG_PATH/package/edgehog-astarte-interface/Config.in"		
+source "$BR2_EXTERNAL_EDGEHOG_PATH/package/edgehog-astarte-interface/Config.in"
 source "$BR2_EXTERNAL_EDGEHOG_PATH/package/edgehog-device-runtime/Config.in"
 source "$BR2_EXTERNAL_EDGEHOG_PATH/package/edgehog-device-hardwareId-service/Config.in"
+source "$BR2_EXTERNAL_EDGEHOG_PATH/package/astarte-message-hub/Config.in"

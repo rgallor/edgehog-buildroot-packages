@@ -1,0 +1,12 @@
+#
+# Copyright 2022-2023 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+realm = ASTARTE_REALM
+device_id = ASTARTE_DEVICE_ID
+pairing_url = ASTARTE_PAIRING_BASE_URL
+pairing_token = ASTARTE_PAIRING_JWT
+grpc_socket_port = ASTARTE_GRPC_SOCKET_PORT
+
+store_directory = "/var/lib/edgehog-device-runtime/"
