@@ -1,0 +1,53 @@
+#
+# Copyright 2022-2023 SECO Mind Srl
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+###############################################################################
+#
+# ASTARTE_MESSAGE_HUB
+#
+################################################################################
+
+ASTARTE_MESSAGE_HUB_VERSION = v0.5.2
+ASTARTE_MESSAGE_HUB_SITE = https://github.com/astarte-platform/astarte-message-hub
+ASTARTE_MESSAGE_HUB_SITE_METHOD = git
+ASTARTE_MESSAGE_HUB_LICENSE = Apache License 2.0
+ASTARTE_MESSAGE_HUB_LICENSE_FILES = COPYING
+
+ASTARTE_MESSAGE_HUB_DEPENDENCIES = host-protobuf
+
+ASTARTE_MESSAGE_HUB_CARGO_ENV = \
+HOST_CC="x86_64-linux-gnu-gcc" \
+TARGET_CC="$(HOST_DIR)/bin/aarch64-linux-gcc" \
+TARGET_AR="$(HOST_DIR)/bin/aarch64-linux-ar"
+
+ASTARTE_MESSAGE_HUB_CARGO_BUILD_OPTS=
+
+ASTARTE_MESSAGE_HUB_CONFIG_TOML_FILE= $(TARGET_DIR)/etc/astarte/astarte-message-hub-config.toml
+
+define ASTARTE_MESSAGE_HUB_INSTALL_INIT_SYSTEMD
+	$(INSTALL) -D -m 644 $(BR2_EXTERNAL_EDGEHOG_PATH)/package/astarte-message-hub/astarte-message-hub.service \
+		$(TARGET_DIR)/usr/lib/systemd/system/astarte-message-hub.service
+endef
+
+define ASTARTE_MESSAGE_HUB_INSTALL_CONFIG_DIR
+	$(INSTALL) -d -m 0755 $(TARGET_DIR)/etc/astarte-message-hub/
+	$(INSTALL) -D -m 644 $(BR2_EXTERNAL_EDGEHOG_PATH)/package/astarte-message-hub/config.toml \
+		$(ASTARTE_MESSAGE_HUB_CONFIG_TOML_FILE)
+	$(SED) 's/ASTARTE_DEVICE_ID/$(BR2_PACKAGE_ASTARTE_MESSAGE_HUB_ASTARTE_DEVICE_ID)/' \
+			$(ASTARTE_MESSAGE_HUB_CONFIG_TOML_FILE)
+	$(SED) 's/ASTARTE_PAIRING_JWT/$(BR2_PACKAGE_ASTARTE_MESSAGE_HUB_ASTARTE_PAIRING_JWT)/' \
+			$(ASTARTE_MESSAGE_HUB_CONFIG_TOML_FILE)
+	$(SED) 's|ASTARTE_PAIRING_BASE_URL|$(BR2_PACKAGE_ASTARTE_MESSAGE_HUB_ASTARTE_PAIRING_BASE_URL)|' \
+			$(ASTARTE_MESSAGE_HUB_CONFIG_TOML_FILE)
+	$(SED) 's/ASTARTE_REALM/$(BR2_PACKAGE_ASTARTE_MESSAGE_HUB_ASTARTE_REALM)/' \
+			$(ASTARTE_MESSAGE_HUB_CONFIG_TOML_FILE)
+	$(SED) 's/ASTARTE_GRPC_SOCKET_PORT/$(BR2_PACKAGE_ASTARTE_MESSAGE_HUB_GRPC_PORT)/' \
+			$(ASTARTE_MESSAGE_HUB_CONFIG_TOML_FILE)
+endef
+
+ASTARTE_MESSAGE_HUB_POST_INSTALL_TARGET_HOOKS += ASTARTE_MESSAGE_HUB_INSTALL_CONFIG_DIR
+
+$(eval $(cargo-package))
