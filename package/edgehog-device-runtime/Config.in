@@ -86,4 +86,15 @@ if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
         help
             Endpoint to connect edgehog-device-runtime with Astarte Message Hub
 
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_SERIAL_NUMBER
+        string "Edgehog serial number"
+        default ""
+        help
+            Serial number for the device, sent as telemetry to Astarte
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_PART_NUMBER
+        string "Edgehog part number"
+        default ""
+        help
+            Part number for the device, sent as telemetry to Astarte
 endif
