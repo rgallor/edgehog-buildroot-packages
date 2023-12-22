@@ -7,6 +7,7 @@
 config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
             bool "edgehog-device-runtime"
             depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+            depends on BR2_PACKAGE_HOST_PROTOBUF_ARCH_SUPPORTS
             depends on BR2_PACKAGE_HAS_UDEV
             depends on BR2_PACKAGE_DBUS
             depends on BR2_FORTIFY_SOURCE_NONE
@@ -14,6 +15,7 @@ config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
             select BR2_PACKAGE_UPOWER
             select BR2_PACKAGE_CA_CERTIFICATES
             select BR2_PACKAGE_HOST_RUSTC
+            select BR2_PACKAGE_HOST_PROTOBUF
             default y
             help
               This is a portable middleware written in Rust, that enables remote device management 
@@ -22,6 +24,26 @@ config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
               https://github.com/edgehog-device-manager/edgehog-device-runtime
 
 if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
+    choice 
+        prompt "Select an astarte library"
+        default BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_LIBRARY_ASTARTE_DEVICE_SDK
+        help
+                Edgehog Device Runtime supports following libraries to communicate with the remote Edgehog
+                instance.
+
+        config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_LIBRARY_ASTARTE_DEVICE_SDK
+            bool "astarte-device-sdk"
+            help
+                    The Astarte Device SDK for Rust is a ready to use library that provides communication and pairing
+                    primitives to an Astarte Cluster.
+
+        config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_LIBRARY_ASTARTE_MESSAGE_HUB
+            bool "astarte-message-hub"
+            depends on BR2_PACKAGE_ASTARTE_MESSAGE_HUB
+            help
+                    A central service that runs on (Linux) devices for collecting and delivering messages from N apps
+                    using 1 MQTT connection to Astarte.
+    endchoice
 
     config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_REALM
       string "Astarte realm"
@@ -48,5 +70,12 @@ if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
         default ""
         help
             Astarte identifies each device with a 128 bit Device ID which has to be unique within its Realm
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_MESSAGE_HUB_ENDPOINT
+        string "Astarte Message Hub enpoint"
+        default "http://[::1]:50051"
+        depends on BR2_PACKAGE_ASTARTE_MESSAGE_HUB
+        help
+            Endpoint to connect edgehog-device-runtime with Astarte Message Hub
 
 endif
