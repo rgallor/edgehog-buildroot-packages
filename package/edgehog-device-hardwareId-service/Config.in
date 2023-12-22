@@ -12,6 +12,6 @@ config BR2_PACKAGE_EDGEHOG_DEVICE_HARDWAREID_SERVICE
             select BR2_PACKAGE_HOST_RUSTC
             default y
             help
-              Reference project of a service that either fetches hardware id from SMBIOS/DMI or from the kernel command line.            
+              Reference project of a service that either fetches hardware id from SMBIOS/DMI or from the kernel command line.
 
               https://github.com/edgehog-device-manager/edgehog-device-runtime/tree/main/hardware-id-service
