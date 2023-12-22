@@ -65,6 +65,14 @@ if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
 
             Can be obtained with ./generate-astarte-credentials -t pairing -p yourrealmkey.key
 
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_CREDENTIAL_SECRET
+        string "Astarte credential secret"
+        default ""
+        help
+            Credential secret to authorize the device.
+
+            Can be obtained by manually registering the device in Astarte.
+
     config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_DEVICE_ID
         string "Astarte Device ID"
         default ""
