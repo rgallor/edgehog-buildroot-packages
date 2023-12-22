@@ -10,6 +10,6 @@ config BR2_PACKAGE_EDGEHOG_ASTARTE_INTERFACE
         help
           Edgehog Astarte Interfaces contains the set of interfaces
           that define a common communication schema between Astarte
-          remote istance and Edgehog devices.
+          remote instance and Edgehog devices.
 
           https://github.com/edgehog-device-manager/edgehog-astarte-interfaces

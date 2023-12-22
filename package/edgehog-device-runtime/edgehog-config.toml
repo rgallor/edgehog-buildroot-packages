@@ -12,6 +12,7 @@ download_directory = "/var/tmp/"
 [astarte_device_sdk]
 device_id = ASTARTE_DEVICE_ID
 pairing_token = ASTARTE_PAIRING_JWT
+credentials_secret = ASTARTE_CREDENTIAL_SECRET
 pairing_url = ASTARTE_PAIRING_BASE_URL
 realm = ASTARTE_REALM
 

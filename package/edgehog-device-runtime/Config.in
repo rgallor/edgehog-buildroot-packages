@@ -10,6 +10,7 @@ config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
             depends on BR2_PACKAGE_HOST_PROTOBUF_ARCH_SUPPORTS
             depends on BR2_PACKAGE_HAS_UDEV
             depends on BR2_PACKAGE_DBUS
+            depends on BR2_PACKAGE_SQLITE
             depends on BR2_FORTIFY_SOURCE_NONE
             select BR2_PACKAGE_EDGEHOG_ASTARTE_INTERFACE
             select BR2_PACKAGE_UPOWER
@@ -65,6 +66,14 @@ if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
 
             Can be obtained with ./generate-astarte-credentials -t pairing -p yourrealmkey.key
 
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_CREDENTIAL_SECRET
+        string "Astarte credential secret"
+        default ""
+        help
+            Credential secret to authorize the device.
+
+            Can be obtained by manually registering the device in Astarte.
+
     config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_DEVICE_ID
         string "Astarte Device ID"
         default ""
@@ -78,4 +87,21 @@ if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
         help
             Endpoint to connect edgehog-device-runtime with Astarte Message Hub
 
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_SERIAL_NUMBER
+        string "Edgehog serial number"
+        default ""
+        help
+            Serial number for the device, sent as telemetry to Astarte
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_PART_NUMBER
+        string "Edgehog part number"
+        default ""
+        help
+            Part number for the device, sent as telemetry to Astarte
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_IMAGE_VERSION
+        string "Edgehog image version"
+        default ""
+        help
+            Image version that will be appended to the /etc/os-release file.
 endif
