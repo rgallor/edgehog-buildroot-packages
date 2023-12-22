@@ -97,4 +97,10 @@ if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
         default ""
         help
             Part number for the device, sent as telemetry to Astarte
+
+    config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_IMAGE_VERSION
+        string "Edgehog image version"
+        default ""
+        help
+            Image version that will be appended to the /etc/os-release file.
 endif
