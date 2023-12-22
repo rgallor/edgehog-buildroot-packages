@@ -10,6 +10,7 @@ config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
             depends on BR2_PACKAGE_HOST_PROTOBUF_ARCH_SUPPORTS
             depends on BR2_PACKAGE_HAS_UDEV
             depends on BR2_PACKAGE_DBUS
+            depends on BR2_PACKAGE_SQLITE
             depends on BR2_FORTIFY_SOURCE_NONE
             select BR2_PACKAGE_EDGEHOG_ASTARTE_INTERFACE
             select BR2_PACKAGE_UPOWER
