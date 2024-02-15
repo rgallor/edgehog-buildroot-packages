@@ -20,6 +20,6 @@ realm = ASTARTE_REALM
 endpoint = ASTARTE_MESSAGE_HUB_ENDPOINT
 
 [[telemetry_config]]
-interface_name= "io.edgehog.devicemanager.StorageUsage"
-enabled= false
-period= 0
+interface_name = "io.edgehog.devicemanager.StorageUsage"
+enabled = false
+period = 0

@@ -4,28 +4,30 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
-            bool "edgehog-device-runtime"
-            depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
-            depends on BR2_PACKAGE_HOST_PROTOBUF_ARCH_SUPPORTS
-            depends on BR2_PACKAGE_HAS_UDEV
-            depends on BR2_PACKAGE_DBUS
-            depends on BR2_PACKAGE_SQLITE
-            depends on BR2_FORTIFY_SOURCE_NONE
-            select BR2_PACKAGE_EDGEHOG_ASTARTE_INTERFACE
-            select BR2_PACKAGE_UPOWER
-            select BR2_PACKAGE_CA_CERTIFICATES
-            select BR2_PACKAGE_HOST_RUSTC
-            select BR2_PACKAGE_HOST_PROTOBUF
-            default y
-            help
-              This is a portable middleware written in Rust, that enables remote device management 
-              on Linux-based systems.
+source "package/ttyd/Config.in"
 
-              https://github.com/edgehog-device-manager/edgehog-device-runtime
+config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
+    bool "edgehog-device-runtime"
+    depends on BR2_PACKAGE_HOST_RUSTC_TARGET_ARCH_SUPPORTS
+    depends on BR2_PACKAGE_HOST_PROTOBUF_ARCH_SUPPORTS
+    depends on BR2_PACKAGE_HAS_UDEV
+    depends on BR2_PACKAGE_DBUS
+    depends on BR2_PACKAGE_SQLITE
+    depends on BR2_FORTIFY_SOURCE_NONE
+    select BR2_PACKAGE_EDGEHOG_ASTARTE_INTERFACE
+    select BR2_PACKAGE_UPOWER
+    select BR2_PACKAGE_CA_CERTIFICATES
+    select BR2_PACKAGE_HOST_RUSTC
+    select BR2_PACKAGE_HOST_PROTOBUF
+    default y
+    help
+        This is a portable middleware written in Rust, that enables remote device management
+        on Linux-based systems.
+
+        https://github.com/edgehog-device-manager/edgehog-device-runtime
 
 if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
-    choice 
+    choice
         prompt "Select an astarte library"
         default BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_ASTARTE_LIBRARY_ASTARTE_DEVICE_SDK
         help
@@ -104,4 +106,32 @@ if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
         default ""
         help
             Image version that will be appended to the /etc/os-release file.
+endif
+
+config BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_FORWARDER
+    bool "edgehog-device-runtime-forwarder"
+    depends on BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME
+    depends on !BR2_STATIC_LIBS
+    depends on BR2_TOOLCHAIN_HAS_THREADS_NPTL
+    depends on BR2_TOOLCHAIN_HAS_SYNC_4
+    depends on BR2_USE_MMU
+    select BR2_PACKAGE_JSON_C
+    select BR2_PACKAGE_LIBUV
+    select BR2_PACKAGE_LIBWEBSOCKETS
+    select BR2_PACKAGE_OPENSSL
+    select BR2_PACKAGE_ZLIB
+    default y
+    help
+        This is a library written in Rust, that enables remote device connection
+        on Linux-based systems.
+
+        https://github.com/edgehog-device-manager/edgehog-device-runtime/tree/main/edgehog-device-runtime-forwarder
+
+if BR2_PACKAGE_EDGEHOG_DEVICE_RUNTIME_FORWARDER
+    config BR2_PACKAGE_TTYD
+        bool "ttyd"
+        help
+            ttyd is a simple command-line tool for sharing terminal over the web.
+
+            https://github.com/tsl0922/ttyd
 endif
