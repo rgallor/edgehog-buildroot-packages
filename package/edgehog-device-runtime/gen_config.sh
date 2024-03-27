@@ -25,12 +25,12 @@ config_device_sdk() {
     fi
 
     cat <<-EOF
-astarte_ignore_ssl = $ignore_ssl
 
 [astarte_device_sdk]
 device_id = "$device_id"
 pairing_url = "$pairing_url"
 realm = "$realm"
+ignore_ssl = $ignore_ssl
 EOF
 
     # Optional
@@ -74,7 +74,7 @@ fi
 
 cat >"$EDGEHOG_DEVICE_RUNTIME_CONFIG_TOML_FILE" <<-EOF
 #
-# Copyright 2022 SECO Mind Srl
+# Copyright 2022-2024 SECO Mind Srl
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -87,9 +87,9 @@ download_directory = "/var/tmp/"
 $config
 
 [[telemetry_config]]
-interface_name= "io.edgehog.devicemanager.StorageUsage"
-enabled= false
-period= 0
+interface_name = "io.edgehog.devicemanager.SystemStatus"
+enabled = true
+period = 60
 EOF
 
 chmod 644 "$EDGEHOG_DEVICE_RUNTIME_CONFIG_TOML_FILE"
